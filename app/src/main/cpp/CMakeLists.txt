@@ -25,13 +25,19 @@ add_library( # Sets the name of the library.
         EGLManager.h
         EGLManager.cpp
         GLRenderer.h
-        GLRenderer.cpp)
+        GLRenderer.cpp
+        Example_Texture.h
+        Example_Texture.cpp)
 
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 
+set(ANDROID_ABI arm64-v8a)
+set(LLGL_ROOT E:/LibCore/vlDependencyRes/LLGL)
+set(LLGL_INCLUDE_DIR "${LLGL_ROOT}/include")
+set(LLGL_LIB_DIR "${LLGL_ROOT}/build_android/${ANDROID_ABI}/build")
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
@@ -50,9 +56,30 @@ find_library(ANDROID_LIB android)
 find_library(egl-lib EGL)
 find_library(gles-lib GLESv2)
 
-# Specifies libraries CMake should link to your target library. You
-# can link multiple libraries, such as libraries you define in this
-# build script, prebuilt third-party libraries, or system libraries.
+add_library(lib_llgl STATIC IMPORTED)
+set_target_properties(lib_llgl PROPERTIES IMPORTED_LOCATION "${LLGL_LIB_DIR}/libLLGLD.a")
+
+add_library(lib_llgl_gles3 STATIC IMPORTED)
+set_target_properties(lib_llgl_gles3 PROPERTIES IMPORTED_LOCATION "${LLGL_LIB_DIR}/libLLGL_OpenGLES3D.a")
+
+add_library(lib_ExampleBase STATIC IMPORTED)
+set_target_properties(lib_ExampleBase PROPERTIES IMPORTED_LOCATION "${LLGL_LIB_DIR}/libExampleBaseD.a")
+
+
+
+target_include_directories(
+        RenderLib
+
+        PRIVATE
+
+        ${LLGL_INCLUDE_DIR}
+        ${LLGL_ROOT}/external/GaussianLib/include
+        ${LLGL_ROOT}/external
+        ${LLGL_ROOT}/examples/Cpp/ExampleBase
+        ${ANDROID_NDK}/sources/android/native_app_glue
+)
+
+MESSAGE(STATUS "ExampleBase=${LLGL_ROOT}/examples/Cpp/ExampleBase")
 
 target_link_libraries(
         RenderLib
@@ -61,4 +88,8 @@ target_link_libraries(
         ${egl-lib}
         ${gles-lib}
         ${log-lib}
+
+        lib_llgl
+        lib_llgl_gles3
+        lib_ExampleBase
 )
