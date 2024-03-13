@@ -24,8 +24,6 @@ add_library( # Sets the name of the library.
         native-lib.cpp
         EGLManager.h
         EGLManager.cpp
-        GLRenderer.h
-        GLRenderer.cpp
         Example_Texture.h
         Example_Texture.cpp)
 

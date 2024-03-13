@@ -5,7 +5,6 @@
 #include <EGL/egl.h>
 #include <GLES2/gl2.h>
 #include <android/native_window.h>
-#include "GLRenderer.h"
 
 class EGLManager {
 public:
@@ -23,8 +22,6 @@ private:
     ANativeWindow* nativeWindow;
 
     bool isInitialized;
-
-    GLRenderer renderer;
 };
 
 #endif // EGLMANAGER_H

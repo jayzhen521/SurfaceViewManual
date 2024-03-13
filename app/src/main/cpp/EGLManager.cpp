@@ -73,9 +73,6 @@ bool EGLManager::initialize(ANativeWindow* window) {
         return false;
     }
 
-
-    renderer.initialize();
-
     isInitialized = true;
     return true;
 }
@@ -83,14 +80,13 @@ bool EGLManager::initialize(ANativeWindow* window) {
 void EGLManager::drawFrame() {
     if (!isInitialized) return;
 
-    renderer.drawFrame();
+    glClearColor(1.0, 0.0, 0.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT);
 
     eglSwapBuffers(display, surface); // 显示渲染结果
 }
 
 void EGLManager::destroy() {
-
-    renderer.destroy();
 
     if (display != EGL_NO_DISPLAY) {
         eglMakeCurrent(display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
