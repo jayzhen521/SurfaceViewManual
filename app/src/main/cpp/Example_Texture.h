@@ -44,8 +44,8 @@ class Example_Texturing : public ExampleBase
 
 public:
 
-    Example_Texturing() :
-        ExampleBase { "LLGL Example: Texturing"}
+    Example_Texturing(EGLInfo eglInfo) :
+        ExampleBase { "LLGL Example: Texturing", eglInfo }
     {
     }
 

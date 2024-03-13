@@ -6,6 +6,8 @@
 #include <GLES2/gl2.h>
 #include <android/native_window.h>
 
+#include "Example_Texture.h"
+
 class EGLManager {
 public:
     EGLManager();
@@ -15,6 +17,8 @@ public:
     void drawFrame();
     void destroy();
 
+    EGLInfo GetGLInfo();
+
 private:
     EGLDisplay display;
     EGLSurface surface;
@@ -22,6 +26,9 @@ private:
     ANativeWindow* nativeWindow;
 
     bool isInitialized;
+
+    Sp_Example_Texturing exampleTexturing;
+
 };
 
 #endif // EGLMANAGER_H
