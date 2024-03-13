@@ -53,11 +53,11 @@ bool EGLManager::initialize(ANativeWindow* window) {
     }
 
 
-    surface = eglCreateWindowSurface(display, config, nativeWindow, nullptr);
-    if (surface == EGL_NO_SURFACE) {
-        __android_log_print(ANDROID_LOG_ERROR, "EGLManager", "Surface creation failed.");
-        return false;
-    }
+//    surface = eglCreateWindowSurface(display, config, nativeWindow, nullptr);
+//    if (surface == EGL_NO_SURFACE) {
+//        __android_log_print(ANDROID_LOG_ERROR, "EGLManager", "Surface creation failed.");
+//        return false;
+//    }
 
 
     EGLint contextAttribs[] = { EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE };
@@ -67,11 +67,14 @@ bool EGLManager::initialize(ANativeWindow* window) {
         return false;
     }
 
+    EGLint configID = -1;
+    eglQueryContext(display, context, EGL_CONFIG_ID, &configID);
 
-    if (!eglMakeCurrent(display, surface, surface, context)) {
-        __android_log_print(ANDROID_LOG_ERROR, "EGLManager", "eglMakeCurrent failed.");
-        return false;
-    }
+
+//    if (!eglMakeCurrent(display, surface, surface, context)) {
+//        __android_log_print(ANDROID_LOG_ERROR, "EGLManager", "eglMakeCurrent failed.");
+//        return false;
+//    }
 
     exampleTexturing = std::make_shared<Example_Texturing>(GetGLInfo());
 
@@ -87,7 +90,7 @@ void EGLManager::drawFrame() {
 
     exampleTexturing->Run();
 
-    eglSwapBuffers(display, surface); // 显示渲染结果
+//    eglSwapBuffers(display, surface); // 显示渲染结果
 }
 
 void EGLManager::destroy() {
