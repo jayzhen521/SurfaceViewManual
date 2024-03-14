@@ -88,7 +88,7 @@ void EGLManager::drawFrame() {
 //    glClearColor(1.0, 0.0, 0.0, 1.0);
 //    glClear(GL_COLOR_BUFFER_BIT);
 
-    exampleTexturing->Run();
+    exampleTexturing->DrawFrame();
 
 //    eglSwapBuffers(display, surface); // 显示渲染结果
 }
