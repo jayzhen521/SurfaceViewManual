@@ -18,6 +18,7 @@ android {
         externalNativeBuild {
             cmake {
                 arguments "-DANDROID_STL=c++_shared"
+                arguments "-DCMAKE_CXX_STANDARD=17"
             }
         }
 

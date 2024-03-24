@@ -6,7 +6,8 @@
 #include <GLES2/gl2.h>
 #include <android/native_window.h>
 
-#include "Example_Texture.h"
+//#include "Example_Texture.h"
+#include "IcebergRender.h"
 
 class EGLManager {
 public:
@@ -17,7 +18,10 @@ public:
     void drawFrame();
     void destroy();
 
-    EGLInfo GetGLInfo();
+    void* GetDisplay();
+    void* GetSurface();
+    void* GetContext();
+    void* GetNativeWindow();
 
 private:
     EGLDisplay display;
@@ -27,7 +31,9 @@ private:
 
     bool isInitialized;
 
-    Sp_Example_Texturing exampleTexturing;
+//    Sp_Example_Texturing exampleTexturing;
+
+    IcebergRender ir;
 
 };
 
