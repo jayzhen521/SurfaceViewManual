@@ -130,7 +130,7 @@ int64_t CreatePropInfoFromJsonPropHandleArray(UniUtil::TypeInfo typeInfo, const 
 	return 0;
 }
 
-int64_t IcebergRender::Init()
+int64_t IcebergRender::Init(EGLDisplay display, EGLSurface surface, EGLContext context, ANativeWindow* nativeWindow, uint32_t width, uint32_t height)
 {
 	Util::Log::Instance().Init(LogName, LogBase, LogInfo, LogWarning, LogErr, LogFatal);
 
@@ -148,7 +148,7 @@ int64_t IcebergRender::Init()
 
 
 
-	const std::string materialPath = "ExportMaterial";
+	const std::string materialPath = PathPrefix + "/ExportMaterial";
 
 	//LoadJson
 	std::string content;
@@ -424,16 +424,22 @@ int64_t IcebergRender::Init()
 	//ExportJson
 	BExporter::Sp_Exporter exporter(new BExporter::Exporter(EAPI::OpType::Draft));
 	exporter->SetExportHandle(proj.GetCurrHandleH());
-	exporter->SetOriginResDir(proj.GetLoadDir());
-	exporter->SetOutputPath(proj.GetSaveDir());
+	exporter->SetOriginResDir(PathPrefix + "/" + proj.GetLoadDir());
+	exporter->SetOutputPath(PathPrefix + "/" + proj.GetSaveDir());
 	exporter->DoExport();
 
 	//Player
 	player = std::make_shared<BPlayer::Player>(EAPI::OpType::PlayRender);
 	player->Init();
 	player->SetPlayHandle(proj.GetCurrHandleH());
-	player->SetMaterialPackDir(proj.GetLoadDir());
-	player->SetInternalResDir(InternalResDir);
+	player->SetMaterialPackDir(PathPrefix + "/" + proj.GetLoadDir());
+	player->SetInternalResDir(PathPrefix + "/" + InternalResDir);
+
+	player->SetRenderDisplay(reinterpret_cast<std::uintptr_t>(display));
+	player->SetRenderSurface(reinterpret_cast<std::uintptr_t>(surface));
+	player->SetRenderContext(reinterpret_cast<std::uintptr_t>(context));
+	player->SetRenderNativeWindow(reinterpret_cast<std::uintptr_t>(nativeWindow));
+	player->SetRenderDimensions({ width, height });
 
 	return 0;
 }

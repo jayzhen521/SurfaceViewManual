@@ -26,9 +26,14 @@
 
 #include <BAPIHelper/BusinessAPIHelper.h>
 
-const std::string InternalResDir = "../../../Res/";
+#include <EGL/egl.h>
+#include <GLES2/gl2.h>
+#include <android/native_window.h>
+
+const std::string PathPrefix = "/storage/emulated/0/Android/data/com.am.surfaceview_manual/files";
+const std::string InternalResDir = "/Res/";
 const std::string LogName = "Demo1";
-const std::string LogBase = "./Logs";
+const std::string LogBase = PathPrefix + "/Logs";
 const std::string LogInfo = LogBase + "/LogInfo.";
 const std::string LogWarning = LogBase + "/LogWarning.";
 const std::string LogErr = LogBase + "/LogErr.";
@@ -41,7 +46,7 @@ int64_t CreatePropInfoFromJsonPropHandleArray(UniUtil::TypeInfo typeInfo, const 
 class IcebergRender
 {
 public:
-	int64_t Init();
+	int64_t Init(EGLDisplay display, EGLSurface surface, EGLContext context, ANativeWindow* nativeWindow, uint32_t width, uint32_t height);
 
 	int64_t RenderLoop();
 
@@ -51,5 +56,12 @@ private:
 	BProj::Project proj;
 
 	BPlayer::Sp_Player player;
+
+	EGLDisplay display;
+	EGLSurface surface;
+	EGLContext context;
+	ANativeWindow* nativeWindow;
+    uint32_t width;
+    uint32_t height;
 
 };

@@ -75,35 +75,39 @@ set(VLCORE_ENGINEAPI_MODULES EngineAPI)
 set(VLCORE_BUSINESSAPI_MODULES BAPIHelper BComp BExporter BLayer BMaterial BPlayer BProject)
 
 foreach(libName IN LISTS VLCORE_BASIC_MODULES)
-        add_library(${libName} SHARED IMPORTED)
-        set_target_properties(${libName} PROPERTIES IMPORTED_LOCATION "${VLCORE_LIB_DIR}/lib${libName}.so")
+        add_library(${libName} STATIC IMPORTED)
+        set_target_properties(${libName} PROPERTIES IMPORTED_LOCATION "${VLCORE_LIB_DIR}/lib${libName}.a")
         target_link_libraries(RenderLib PRIVATE ${libName})
 endforeach()
 
 foreach(libName IN LISTS VLCORE_DRIVE_MODULES)
-        add_library(${libName} SHARED IMPORTED)
-        set_target_properties(${libName} PROPERTIES IMPORTED_LOCATION "${VLCORE_LIB_DIR}/lib${libName}.so")
+        add_library(${libName} STATIC IMPORTED)
+        set_target_properties(${libName} PROPERTIES IMPORTED_LOCATION "${VLCORE_LIB_DIR}/lib${libName}.a")
         target_link_libraries(RenderLib PRIVATE ${libName})
 endforeach()
 
 foreach(libName IN LISTS VLCORE_LOGIC_MODULES)
-        add_library(${libName} SHARED IMPORTED)
-        set_target_properties(${libName} PROPERTIES IMPORTED_LOCATION "${VLCORE_LIB_DIR}/lib${libName}.so")
+        add_library(${libName} STATIC IMPORTED)
+        set_target_properties(${libName} PROPERTIES IMPORTED_LOCATION "${VLCORE_LIB_DIR}/lib${libName}.a")
         MESSAGE(STATUS "LOGICMODULE-${VLCORE_LIB_DIR}/lib${libName}.so")
         target_link_libraries(RenderLib PRIVATE ${libName})
 endforeach()
 
 foreach(libName IN LISTS VLCORE_ENGINEAPI_MODULES)
-        add_library(${libName} SHARED IMPORTED)
-        set_target_properties(${libName} PROPERTIES IMPORTED_LOCATION "${VLCORE_LIB_DIR}/lib${libName}.so")
+        add_library(${libName} STATIC IMPORTED)
+        set_target_properties(${libName} PROPERTIES IMPORTED_LOCATION "${VLCORE_LIB_DIR}/lib${libName}.a")
         target_link_libraries(RenderLib PRIVATE ${libName})
 endforeach()
 
 foreach(libName IN LISTS VLCORE_BUSINESSAPI_MODULES)
-        add_library(${libName} SHARED IMPORTED)
-        set_target_properties(${libName} PROPERTIES IMPORTED_LOCATION "${VLCORE_LIB_DIR}/lib${libName}.so")
+        add_library(${libName} STATIC IMPORTED)
+        set_target_properties(${libName} PROPERTIES IMPORTED_LOCATION "${VLCORE_LIB_DIR}/lib${libName}.a")
         target_link_libraries(RenderLib PRIVATE ${libName})
 endforeach()
+
+
+
+
 
 foreach(projName IN LISTS VLCORE_BASIC_MODULES)
         target_include_directories(RenderLib PRIVATE ${VLCORE_ROOT}/Basic/${projName}/include)

@@ -78,7 +78,7 @@ bool EGLManager::initialize(ANativeWindow* window) {
 
 //    exampleTexturing = std::make_shared<Example_Texturing>(GetGLInfo());
 
-    ir.Init();
+    ir.Init(GetDisplay(), GetSurface(), GetContext(), GetNativeWindow(), GetWidth(), GetHeight());
 
     isInitialized = true;
     return true;
@@ -91,7 +91,7 @@ void EGLManager::drawFrame() {
 //    glClear(GL_COLOR_BUFFER_BIT);
 
 //    exampleTexturing->DrawFrame();
-//    ir.RenderLoop();
+    ir.RenderLoop();
 
 
 //    eglSwapBuffers(display, surface); // 显示渲染结果
@@ -132,7 +132,19 @@ void* EGLManager::GetContext()
     return context;
 }
 
-void* EGLManager::GetNativeWindow()
+ANativeWindow* EGLManager::GetNativeWindow()
 {
-    return static_cast<void*>(nativeWindow);
+    return nativeWindow;
+}
+
+uint32_t EGLManager::GetWidth()
+{
+    int32_t width = ANativeWindow_getWidth(nativeWindow);
+    return width;
+}
+
+uint32_t EGLManager::GetHeight()
+{
+    int32_t height = ANativeWindow_getHeight(nativeWindow);
+    return height;
 }

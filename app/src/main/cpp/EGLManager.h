@@ -21,7 +21,9 @@ public:
     void* GetDisplay();
     void* GetSurface();
     void* GetContext();
-    void* GetNativeWindow();
+    ANativeWindow * GetNativeWindow();
+    uint32_t GetWidth();
+    uint32_t GetHeight();
 
 private:
     EGLDisplay display;
