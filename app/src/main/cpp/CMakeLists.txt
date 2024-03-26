@@ -54,11 +54,11 @@ find_library(ANDROID_LIB android)
 find_library(egl-lib EGL)
 find_library(gles-lib GLESv3)
 
-add_library(lib_llgl SHARED IMPORTED)
-set_target_properties(lib_llgl PROPERTIES IMPORTED_LOCATION "${LLGL_LIB_DIR}/libLLGL.so")
+add_library(lib_llgl STATIC IMPORTED)
+set_target_properties(lib_llgl PROPERTIES IMPORTED_LOCATION "${LLGL_LIB_DIR}/libLLGLD.a")
 
-add_library(lib_llgl_gles3 SHARED IMPORTED)
-set_target_properties(lib_llgl_gles3 PROPERTIES IMPORTED_LOCATION "${LLGL_LIB_DIR}/libLLGL_OpenGLES3.so")
+add_library(lib_llgl_gles3 STATIC IMPORTED)
+set_target_properties(lib_llgl_gles3 PROPERTIES IMPORTED_LOCATION "${LLGL_LIB_DIR}/libLLGL_OpenGLES3D.a")
 
 #add_library(lib_ExampleBase STATIC IMPORTED)
 #set_target_properties(lib_ExampleBase PROPERTIES IMPORTED_LOCATION "${LLGL_LIB_DIR}/libExampleBase.a")

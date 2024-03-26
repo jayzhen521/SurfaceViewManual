@@ -32,12 +32,14 @@ bool EGLManager::initialize(ANativeWindow* window) {
 
 
     const EGLint attribs[] = {
-            EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, // 请求OpenGL ES 2.0
-            EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
-            EGL_BLUE_SIZE, 8,
-            EGL_GREEN_SIZE, 8,
+            EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT, // 请求OpenGL ES 2.0兼容配置
+            EGL_SURFACE_TYPE, EGL_PBUFFER_BIT,       // 请求支持PBuffer
             EGL_RED_SIZE, 8,
-            EGL_NONE
+            EGL_GREEN_SIZE, 8,
+            EGL_BLUE_SIZE, 8,
+            EGL_ALPHA_SIZE, 8,                       // 请求至少8位的颜色缓冲区
+            EGL_DEPTH_SIZE, 16,                      // 请求至少16位深度缓冲区
+            EGL_NONE                                // 属性列表终止符
     };
 
 
