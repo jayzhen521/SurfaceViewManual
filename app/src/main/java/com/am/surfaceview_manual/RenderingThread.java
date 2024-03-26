@@ -22,10 +22,10 @@ class RenderingThread extends Thread {
         while (running) {
             // 渲染逻辑...
 
-            eglHelper.DrawFrame();
+            eglHelper.onDrawFrame();
 
             // 交换缓冲区，显示绘制内容
-            eglHelper.swapBuffers();
+//            eglHelper.swapBuffers();
         }
 
         eglHelper.release();

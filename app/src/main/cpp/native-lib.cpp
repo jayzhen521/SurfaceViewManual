@@ -8,7 +8,7 @@
 
 extern "C" {
 JNIEXPORT jlong JNICALL
-Java_com_am_surfaceview_1manual_MainActivity_createEGLManager(JNIEnv* env, jobject /* this */, jobject surface) {
+Java_com_am_surfaceview_1manual_EGLHelper_createEGLManager(JNIEnv* env, jobject /* this */, jobject surface) {
     ANativeWindow* window = ANativeWindow_fromSurface(env, surface);
     EGLManager* eglManager = new EGLManager();
     if (eglManager->initialize(window)) {
@@ -20,7 +20,7 @@ Java_com_am_surfaceview_1manual_MainActivity_createEGLManager(JNIEnv* env, jobje
 }
 
 JNIEXPORT void JNICALL
-Java_com_am_surfaceview_1manual_MainActivity_drawFrame(JNIEnv* env, jobject /* this */, jlong eglManagerPtr) {
+Java_com_am_surfaceview_1manual_EGLHelper_drawFrame(JNIEnv* env, jobject /* this */, jlong eglManagerPtr) {
     EGLManager* eglManager = reinterpret_cast<EGLManager*>(eglManagerPtr);
     if (eglManager != nullptr) {
         eglManager->drawFrame();
@@ -28,7 +28,7 @@ Java_com_am_surfaceview_1manual_MainActivity_drawFrame(JNIEnv* env, jobject /* t
 }
 
 JNIEXPORT void JNICALL
-Java_com_am_surfaceview_1manual_MainActivity_destroyEGLManager(JNIEnv* env, jobject /* this */, jlong eglManagerPtr) {
+Java_com_am_surfaceview_1manual_EGLHelper_destroyEGLManager(JNIEnv* env, jobject /* this */, jlong eglManagerPtr) {
     EGLManager* eglManager = reinterpret_cast<EGLManager*>(eglManagerPtr);
     if (eglManager != nullptr) {
         eglManager->destroy();

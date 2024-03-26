@@ -21,6 +21,10 @@ public class MainActivity extends AppCompatActivity {
 
     private long eglManagerPtr = 0;
 
+    private native long createEGLManager(Surface surface);
+    private native void drawFrame(long eglManagerPtr);
+    private native void destroyEGLManager(long eglManagerPtr);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

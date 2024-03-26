@@ -45,9 +45,11 @@ public class EGLHelper {
 
     public void init() {
 
-        eglInit();
+//        eglInit();
 
-        renderInit();
+        manualEGLInit(surface);
+
+//        renderInit();
 
     }
 
@@ -161,6 +163,11 @@ public class EGLHelper {
         if (!EGL14.eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext)) {
             throw new RuntimeException("Failed to bind context and surface");
         }
+    }
+
+    void manualEGLInit(Surface surface)
+    {
+        eglManagerPtr = createEGLManager(surface);
     }
 
     void renderInit()
@@ -279,9 +286,19 @@ public class EGLHelper {
 
     }
 
-    void DrawFrame()
+    void onDrawFrame()
     {
-//        x += 0.05f;
+        manualEGLDrawFrame();
+    }
+
+    void manualEGLDrawFrame()
+    {
+        drawFrame(eglManagerPtr);
+    }
+
+    void renderDrawFrame()
+    {
+        //        x += 0.05f;
 //        if(x > 1.0)
 //        {
 //            x = 0.0f;
@@ -332,7 +349,6 @@ public class EGLHelper {
         GLES20.glDisableVertexAttribArray(texCoordHandle);
 
         Log.i("GLError", "" + GLES20.glGetError());
-
     }
 
     private int loadShader(int type, String shaderCode) {
