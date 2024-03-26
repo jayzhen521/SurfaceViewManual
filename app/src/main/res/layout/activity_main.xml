@@ -6,15 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- activity_main.xml -->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
 
-        <SurfaceView
+        <com.am.surfaceview_manual.MySurfaceView
             android:id="@+id/my_surface_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
